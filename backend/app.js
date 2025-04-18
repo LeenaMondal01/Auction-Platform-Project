@@ -5,7 +5,9 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import { connection } from "./database/connection.js";
 import { errorMiddlerware } from "./middlewares/error.js";
-import userRouter from "./router/userRoutes.js"
+import userRouter from "./router/userRoutes.js";
+import auctionItemRouter from "./router/auctionItemRoutes.js";
+
 const app = express();
 config({
   path: "./config/config.env"
@@ -26,8 +28,9 @@ app.use(fileUpload({
 }))
 
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/auctionitem", auctionItemRouter);
 
 connection();
-app.use(errorMiddlerware)
+app.use(errorMiddlerware);
  
 export default app;

@@ -3,8 +3,13 @@ import mongoose from "mongoose";
 const auctionSchema = new mongoose.Schema({
     title: String,
     description: String,
+    category: String,
     startingBid: Number,
     currentBid: { type: Number, default: 0},
+    condition: {
+        type: String,
+        enum: ["New", "Used"],
+    },
     startTime: String,
     endTime: String,
     image: {
