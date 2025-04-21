@@ -7,6 +7,7 @@ import { connection } from "./database/connection.js";
 import { errorMiddlerware } from "./middlewares/error.js";
 import userRouter from "./router/userRoutes.js";
 import auctionItemRouter from "./router/auctionItemRoutes.js";
+import bidRouter from "./router/bidRoutes.js"
 
 const app = express();
 config({
@@ -29,6 +30,7 @@ app.use(fileUpload({
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/auctionitem", auctionItemRouter);
+app.use("/api/v1/bid",bidRouter)
 
 connection();
 app.use(errorMiddlerware);
