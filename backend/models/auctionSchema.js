@@ -38,7 +38,7 @@ const auctionSchema = new mongoose.Schema({
             amount: Number,
         },
     ],
-    higestBidder: {
+    highestBidder: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },

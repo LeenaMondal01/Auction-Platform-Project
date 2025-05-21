@@ -4,7 +4,7 @@ class ErrorHandler extends Error {
         this.statusCode = statusCode;
     }
 }
-export const errorMiddlerware = (err, req, res, next) => {
+export const errorMiddleware = (err, req, res, next) => {
     err.message = err.message || "Internal server error.";
     err.statusCode = err.statusCode || 500;
 
@@ -21,7 +21,7 @@ export const errorMiddlerware = (err, req, res, next) => {
         err = new ErrorHandler(message, 400);
     }
 
-    const errorMessage = err.error ? Object.values(err.errors).map((error) => error.message).json(" ") : err.message;
+    const errorMessage = err.error ? Object.values(err.errors).map((error) => error.message).join(" ") : err.message;
 
     return res.status(err.statusCode).json({
         success: false,

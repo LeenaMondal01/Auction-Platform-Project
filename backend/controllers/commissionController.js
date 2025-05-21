@@ -4,6 +4,8 @@ import {PaymentProof} from "../models/commissionProofSchema.js";
 import {User} from "../models/userSchema.js"
 import {v2 as cloudinary} from "cloudinary"
 export const proofOfCommission = catchAsyncErrors(async(req,res , next)=>{
+
+
     if(!req.files || Object.keys(req.files).length===0){
         return next(new ErrorHandler("Payment Proof Screenshot required",400));
     }
