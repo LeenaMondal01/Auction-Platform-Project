@@ -226,6 +226,8 @@ export const republishAuction = catchAsyncErrors(async (req, res, next) => {
     useFindAndModify: false,
   });
 
+  await Bid.deleteMany({auctionItem:auctionItem._id})
+
   const createdBy = await User.findByIdAndUpdate(
     req.user._id,
     { unpaidCommission: 0 },
