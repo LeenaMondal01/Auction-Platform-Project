@@ -7,7 +7,7 @@ import { calculateCommission } from "../controllers/commissionController.js";
 
 export const endedAuctionCron = () => {
   cron.schedule("*/1 * * * *", async () => {
-    console.log("Running ended Commission Cron... ");
+    //console.log("Running ended Commission Cron... ");
     const now = new Date();
     //console.log("Server time (UTC):", now.toISOString());
     const endedAuctions = await Auction.find({
