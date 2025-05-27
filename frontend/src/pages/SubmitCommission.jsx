@@ -28,7 +28,7 @@ const SubmitCommission = () => {
       <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col min-h-screen py-4 justify-center">
         <div className="bg-white mx-auto w-full h-auto px-2 flex flex-col gap-4 items-center py-4 justify-center rounded-md ">
           <form className="flex flex-col gap-5 w-full" onSubmit={handlePaymentProof}> 
-            <h3>Upload Payment Proof</h3>
+             <h3 className={`text-[#D6482B] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}>Upload Payment Proof</h3>
             <div className="flex flex-col gap-2">
                 <label className="text=[16px] text-stone-500">Amount</label>
                 <input type="number" 

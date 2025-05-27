@@ -68,7 +68,7 @@ const SideDrawer = () => {
                     className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482b] hover:transition-all hover:duration-150 "
                   >
                     <FaFileInvoiceDollar />
-                    submit commission
+                    Submit Commission
                   </Link>
                 </li>
                 <li>
@@ -135,7 +135,7 @@ const SideDrawer = () => {
             <li>
               <Link
                 to={"/how-it-works-info"}
-                className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482b]  hover:transition-all hover:duration-150 "
+                className="flex text-xl font-semibold gap-2 items-center hover:text-[#D6482b]  hover:transition-all hover:duration-150 "
               >
                 <SiGooglesearchconsole />
                 How it works
