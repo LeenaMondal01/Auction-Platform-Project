@@ -42,6 +42,21 @@ const userSlice = createSlice({
       state.isAuthenticated = false;
       state.user = {};
     },
+    fetchUserRequest(state, action) {
+      state.loading = true;
+      state.isAuthenticated = false;
+      state.user = {};
+    },
+    fetchUserSuccess(state, action) {
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.user = action.payload.user;
+    },
+    fetchUserFailed(state, action) {
+      state.loading = false;
+      state.isAuthenticated = false;
+      state.user = {};
+    },
 
     logoutSuccess(state, action) {
       state.isAuthenticated = false;
@@ -104,7 +119,7 @@ export const login = (data) => async (dispatch) => {
 
 export const logout = () => async(dispatch) => {
     try{
-        const response= await axios.get("http://localhost:5000/api/v1/user/logout,",{withCredentials:true});
+        const response= await axios.get("http://localhost:5000/api/v1/user/logout",{withCredentials:true});
         dispatch(userSlice.actions.logoutSuccess());
         toast.success(response.data.message);  
         dispatch(userSlice.actions.clearAllErrors());
@@ -112,6 +127,18 @@ export const logout = () => async(dispatch) => {
         dispatch(userSlice.actions.logoutFailed());
         toast.error(error.response.data.message);
         dispatch(userSlice.actions.clearAllErrors());
+    }
+};
+export const fetchUser = () => async(dispatch) => {
+  dispatch(userSlice.actions.fetchUserRequest());
+    try{
+        const response= await axios.get("http://localhost:5000/api/v1/user/me",{withCredentials:true});
+        dispatch(userSlice.actions.fetchUserSuccess(response.data.user)); 
+        dispatch(userSlice.actions.clearAllErrors());
+    }catch(error){
+        dispatch(userSlice.actions.fetchUserFailed());
+        dispatch(userSlice.actions.clearAllErrors());
+        console.error(error);
     }
 };
 export default userSlice.reducer;
