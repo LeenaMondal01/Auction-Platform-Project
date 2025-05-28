@@ -9,6 +9,7 @@ import SubmitCommission from './pages/SubmitCommission';
 import { useDispatch } from 'react-redux';
 import { fetchUser } from './store/slices/userSlice';
 import HowItWorks from './pages/HowItWorks';
+import About from './pages/About';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,8 @@ const App = () => {
       <Route path='/login' element={<Login/>} />
       <Route path='/submit-commission' element={<SubmitCommission/>} />
       <Route path='/how-it-works-info' element={<HowItWorks/>}></Route>
+      <Route path='/about' element={<About/>}></Route>
+
     </Routes>
     <ToastContainer position='top-right'/>
   </Router>
