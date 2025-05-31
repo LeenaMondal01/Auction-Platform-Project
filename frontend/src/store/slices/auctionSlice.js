@@ -19,6 +19,7 @@ const auctionSlice = createSlice({
         getAllAuctionItemSuccess(state, action) {
             state.loading = false;
             state.allAuctions = action.payload;
+            
         },
         getAllAuctionItemFailed(state, action) {
             state.loading = false;
