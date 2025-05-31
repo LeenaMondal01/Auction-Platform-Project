@@ -1,7 +1,6 @@
-import {createSlice} from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {toast} from "react-toastify";
-
+import { toast } from "react-toastify";
 
 const userSlice = createSlice({
   name: "user",
@@ -56,7 +55,7 @@ const userSlice = createSlice({
     fetchUserFailed(state, action) {
       state.loading = false;
       state.isAuthenticated = false;
-      state.user = {  };
+      state.user = {};
     },
 
     logoutSuccess(state, action) {
@@ -68,18 +67,18 @@ const userSlice = createSlice({
       state.isAuthenticated = state.isAuthenticated;
       state.user = state.user;
     },
-     fetchLeaderboardRequest(state,action){
-      state.loading=true;
-      state.leaderboard=[];
-     },
-     fetchLeaderboardSuccess(state,action){
-       state.loading=false;
-      state.leaderboard=action.payload;
-     },
-     fetchLeaderboardFailed(state,action){
-      state.loading=false;
-      state.leaderboard=[];
-     },
+    fetchLeaderboardRequest(state, action) {
+      state.loading = true;
+      state.leaderboard = [];
+    },
+    fetchLeaderboardSuccess(state, action) {
+      state.loading = false;
+      state.leaderboard = action.payload;
+    },
+    fetchLeaderboardFailed(state, action) {
+      state.loading = false;
+      state.leaderboard = [];
+    },
     clearAllErrors(state, action) {
       state.user = state.user;
       state.isAuthenticated = state.isAuthenticated;
@@ -89,25 +88,26 @@ const userSlice = createSlice({
   },
 });
 
-
-
-export const register = (data) => async(dispatch) => {
-    dispatch(userSlice.actions.registerRequest());
-    try{
-        const response = await axios.post("http://localhost:5000/api/v1/user/register",data,{
-            withCredentials: true,
-            headers: {"Content-Type": "multipart/form-data"},
-        });
-        dispatch(userSlice.actions.registerSuccess(response.data));
-        toast.success(response.data.message);
-        dispatch(userSlice.actions.clearAllErrors());
-    }
-    catch(error){
-        dispatch(userSlice.actions.registerFailed());
-        toast.error(error.response.data.message);
-        dispatch(userSlice.actions.clearAllErrors());
-    }
-}
+export const register = (data) => async (dispatch) => {
+  dispatch(userSlice.actions.registerRequest());
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/v1/user/register",
+      data,
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+    dispatch(userSlice.actions.registerSuccess(response.data));
+    toast.success(response.data.message);
+    dispatch(userSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(userSlice.actions.registerFailed());
+    toast.error(error.response.data.message);
+    dispatch(userSlice.actions.clearAllErrors());
+  }
+};
 
 export const login = (data) => async (dispatch) => {
   dispatch(userSlice.actions.loginRequest());
@@ -130,40 +130,50 @@ export const login = (data) => async (dispatch) => {
   }
 };
 
-export const logout = () => async(dispatch) => {
-    try{
-        const response= await axios.get("http://localhost:5000/api/v1/user/logout",{withCredentials:true});
-        dispatch(userSlice.actions.logoutSuccess());
-        toast.success(response.data.message);  
-        dispatch(userSlice.actions.clearAllErrors());
-    }catch(error){
-        dispatch(userSlice.actions.logoutFailed());
-        toast.error(error.response.data.message);
-        dispatch(userSlice.actions.clearAllErrors());
-    }
+export const logout = () => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      "http://localhost:5000/api/v1/user/logout",
+      { withCredentials: true }
+    );
+    dispatch(userSlice.actions.logoutSuccess());
+    toast.success(response.data.message);
+    dispatch(userSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(userSlice.actions.logoutFailed());
+    toast.error(error.response.data.message);
+    dispatch(userSlice.actions.clearAllErrors());
+  }
 };
-export const fetchUser = () => async(dispatch) => {
+export const fetchUser = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchUserRequest());
-    try{
-        const response= await axios.get("http://localhost:5000/api/v1/user/me",{withCredentials:true});
-        dispatch(userSlice.actions.fetchUserSuccess(response.data.user)); 
-        dispatch(userSlice.actions.clearAllErrors());
-    }catch(error){
-        dispatch(userSlice.actions.fetchUserFailed());
-        dispatch(userSlice.actions.clearAllErrors());
-        console.error(error);
-    }
+  try {
+    const response = await axios.get("http://localhost:5000/api/v1/user/me", {
+      withCredentials: true,
+    });
+    dispatch(userSlice.actions.fetchUserSuccess(response.data.user));
+    dispatch(userSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(userSlice.actions.fetchUserFailed());
+    dispatch(userSlice.actions.clearAllErrors());
+    console.error(error);
+  }
 };
-export const fetchLeaderboard = () => async(dispatch) => {
+export const fetchLeaderboard = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchLeaderboardRequest());
-    try{
-        const response= await axios.get("http://localhost:5000/api/v1/user/leaderboard",{withCredentials:true,});
-        dispatch(userSlice.actions.fetchLeaderboardSuccess(response.data.leaderboard)); 
-        dispatch(userSlice.actions.clearAllErrors());
-    }catch(error){
-        dispatch(userSlice.actions.fetchLeaderboardFailed());
-        dispatch(userSlice.actions.clearAllErrors());
-        console.error(error);
-    }
+  try {
+    const response = await axios.get(
+      "http://localhost:5000/api/v1/user/leaderboard",
+      { withCredentials: true }
+    );
+    dispatch(
+      userSlice.actions.fetchLeaderboardSuccess(response.data.leaderboard)
+    );
+    dispatch(userSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(userSlice.actions.fetchLeaderboardFailed());
+    dispatch(userSlice.actions.clearAllErrors());
+    console.error(error);
+  }
 };
 export default userSlice.reducer;

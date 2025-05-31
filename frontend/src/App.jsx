@@ -11,7 +11,7 @@ import { fetchUser,fetchLeaderboard } from './store/slices/userSlice';
 import HowItWorks from './pages/HowItWorks';
 import About from './pages/About';
 import { getAllAuctionItems } from './store/slices/auctionSlice';
-import Leaderboard from './pages/home-sub-components/Leaderboard';
+import Leaderboard from './pages/Leaderboard';
 
 
 
