@@ -17,6 +17,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchUser());
     dispatch(getAllAuctionItems());
+    dispatch(fetchLeaderboard());
   },[]);
   return <Router>
     <SideDrawer />
