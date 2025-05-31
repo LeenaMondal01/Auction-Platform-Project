@@ -7,19 +7,23 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import SubmitCommission from './pages/SubmitCommission';
 import { useDispatch } from 'react-redux';
-import { fetchUser } from './store/slices/userSlice';
+import { fetchUser,fetchLeaderboard } from './store/slices/userSlice';
 import HowItWorks from './pages/HowItWorks';
 import About from './pages/About';
 import { getAllAuctionItems } from './store/slices/auctionSlice';
+import Leaderboard from './pages/home-sub-components/Leaderboard';
+
+
+
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUser());
     dispatch(getAllAuctionItems());
-    dispatch(fetchLeaderboard());
+     dispatch(fetchLeaderboard());
   },[]);
-  return <Router>
+  return( <Router>
     <SideDrawer />
     <Routes>
       <Route path='/' element={<Home/>}/>
@@ -28,10 +32,11 @@ const App = () => {
       <Route path='/submit-commission' element={<SubmitCommission/>} />
       <Route path='/how-it-works-info' element={<HowItWorks/>}></Route>
       <Route path='/about' element={<About/>}></Route>
-
+       <Route path="/leaderboard" element={<Leaderboard />} />
     </Routes>
     <ToastContainer position='top-right'/>
   </Router>
-}
+  );
+};
 
-export default App
+export default App;

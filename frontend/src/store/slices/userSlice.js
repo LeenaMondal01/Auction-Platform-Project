@@ -51,12 +51,12 @@ const userSlice = createSlice({
     fetchUserSuccess(state, action) {
       state.loading = false;
       state.isAuthenticated = true;
-      state.user = action.payload.user;
+      state.user = action.payload;
     },
     fetchUserFailed(state, action) {
       state.loading = false;
       state.isAuthenticated = false;
-      state.user = {};
+      state.user = {  };
     },
 
     logoutSuccess(state, action) {
@@ -154,10 +154,10 @@ export const fetchUser = () => async(dispatch) => {
         console.error(error);
     }
 };
-export const getLeaderboard = () => async(dispatch) => {
+export const fetchLeaderboard = () => async(dispatch) => {
   dispatch(userSlice.actions.fetchLeaderboardRequest());
     try{
-        const response= await axios.get("http://localhost:5000/api/v1/user/leaderboard",{withCredentials:true});
+        const response= await axios.get("http://localhost:5000/api/v1/user/leaderboard",{withCredentials:true,});
         dispatch(userSlice.actions.fetchLeaderboardSuccess(response.data.leaderboard)); 
         dispatch(userSlice.actions.clearAllErrors());
     }catch(error){
