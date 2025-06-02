@@ -2,8 +2,10 @@ import Spinner from '@/custom-components/Spinner';
 import { getAuctionDetail } from '@/store/slices/auctionSlice';
 import React, { useState, useEffect } from 'react';
 import { FaGreaterThan } from 'react-icons/fa';
+import { RiAuctionFill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams, Link } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 const AuctionItem = () => {
   const { id } = useParams();
@@ -23,12 +25,35 @@ const AuctionItem = () => {
   }, [isAuthenticated, id]);
 
   const [amount,setAmount]=useState(0);
-  const handleBid=()=>{
-    const formData=new FormData();
-    formData.append("amount",amount);
-    dispatch(placeBid(id,formData));
-    dispatch(getAuctionDetail(id));
+  const handleBid = async () => {
+  if (!amount || isNaN(amount) || Number(amount) <= 0) {
+    toast.error("Please enter a valid bid amount.");
+    return;
   }
+
+  const minBid = auctionDetail?.startingBid ?? 0;
+  const currentTopBid = auctionBidders?.[0]?.amount ?? minBid;
+
+  if (Number(amount) <= currentTopBid) {
+    toast.error(`Bid must be higher than the current highest bid (Rs.${currentTopBid}).`);
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("amount", amount);
+
+  const result = await dispatch(placeBid(id, formData));
+
+  if (result.success) {
+    toast.success(result.message);
+    setAmount("");
+    dispatch(getAuctionDetail(id)); // Refresh auction data
+  } else {
+    toast.error(result.message);
+  }
+};
+
+  
 
   const isAuctionOngoing =
     auctionDetail?.startTime &&
@@ -93,10 +118,10 @@ const AuctionItem = () => {
                     <div className="flex items-center gap-4">
                       <img
                         src={element.profileImage}
-                        alt={element.username}
+                        alt={element.userName}
                         className="w-12 h-12 rounded-full my-2 hidden md:block"
                       />
-                      <p className="text-[18px] font-semibold">{element.username}</p>
+                      <p className="text-[18px] font-semibold">{element.userName}</p>
                     </div>
                     <p className={`text-[20px] font-semibold ${
                       index === 0
@@ -117,6 +142,42 @@ const AuctionItem = () => {
                 <img src="/auctionend.jpg" alt="ended" className="w-full max-h-[650px]" />
               )}
             </div>
+  
+          
+
+
+<div className="bg-[#D6482B] py-4 text-[16px] md:text-[24px] font-semibold px-4 flex items-center justify-between">
+  {auctionDetail?.startTime && auctionDetail?.endTime ? (
+    Date.now() >= new Date(auctionDetail.startTime) &&
+    Date.now() <= new Date(auctionDetail.endTime) ? (
+      <>
+        <div className="flex gap-3 flex-col sm:flex-row sm:items-center">
+          <p className="text-white">Place Bid</p>
+          <input
+            type="number"
+            className="w-32 focus:outline-block md:text-[20px] p-1 bg-white"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+        </div>
+        <button
+          className="p-4 text-white bg-black rounded-full transition-all duration-300 hover:bg-[#e9e7e7]"
+          onClick={handleBid}
+        >
+          <RiAuctionFill />
+        </button>
+      </>
+    ) : new Date(auctionDetail.startTime) > Date.now() ? (
+      <p className="text-white font-semibold text-xl">Auction has not started yet!!</p>
+    ) : (
+      <p className="text-white font-semibold text-xl">Auction has ended!!</p>
+    )
+  ) : (
+    <p className="text-white font-semibold text-xl">Loading auction details...</p>
+  )}
+</div>
+
+
           </div>
         </div>
       )}
