@@ -13,6 +13,15 @@ const auctionSlice = createSlice({
         allAuctions: [],
     },
     reducers: {
+        createAuctionRequest(state,action){
+            state.loading = true;
+        },
+        createAuctionSuccess(state,action){
+            state.loading = false;
+        },
+        createAuctionFailed(state,action){
+            state.loading = false;
+        },
         getAllAuctionItemRequest(state, action) {
             state.loading = true;
         },
@@ -86,5 +95,21 @@ export const getAuctionDetail = (id) => async (dispatch) => {
     }
 };
 
+export const createAuction = (data) => async (dispatch) =>{
+    dispatch(auctionSlice.actions.createAuctionRequest());
+    try {
+        const response = await axios.post("http://localhost:5000/api/v1/auctionitem/create",data,{
+            withCredentials: true,
+            headers: {"Content-Type" : "multipart/form-data"},
+        });
+        dispatch(auctionSlice.actions.createAuctionSuccess());
+        toast.success(response.data.message);
+        dispatch(auctionSlice.actions.resetSlice());
+    } catch (error) {
+        dispatch(auctionSlice.actions.createAuctionFailed());
+        toast.error(error.response.data.message);
+        dispatch(auctionSlice.actions.resetSlice());
+    }
+}
 
 export default auctionSlice.reducer;
