@@ -60,7 +60,7 @@ const CreateAuction = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
   const navigateTo = useNavigate();
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated || user.role!=="Auctioneer") {
       navigateTo("/");
     }
   }, [isAuthenticated]);

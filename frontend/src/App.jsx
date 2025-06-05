@@ -15,6 +15,9 @@ import Leaderboard from './pages/Leaderboard';
 import Auctions from './pages/Auctions';
 import AuctionItem from './pages/AuctionItem';
 import CreateAuction from './pages/CreateAuction'
+import ViewMyAuctions from "./pages/ViewMyAuctions";
+import ViewAuctionDetails from './pages/ViewAuctionDetails';
+
 
 
 
@@ -36,9 +39,11 @@ const App = () => {
       <Route path='/how-it-works-info' element={<HowItWorks/>}></Route>
       <Route path='/about' element={<About/>}></Route>
        <Route path="/leaderboard" element={<Leaderboard />} />
-       <Route path='/auction' element={<Auctions/>} />
+       <Route path='/auctions' element={<Auctions/>} />
        <Route path='/auction/item/:id' element={<AuctionItem/>} />
         <Route path='/create-auction' element={<CreateAuction/>}></Route>
+         <Route path='/view-my-auctions' element={<ViewMyAuctions/>}></Route>
+          <Route path='/auction/details/:id' element={<ViewAuctionDetails/>}></Route>
     </Routes>
     <ToastContainer position='top-right'/>
   </Router>
