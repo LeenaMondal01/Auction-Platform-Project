@@ -160,6 +160,7 @@ export const createAuction = (data) => async (dispatch) =>{
         });
         dispatch(auctionSlice.actions.createAuctionSuccess());
         toast.success(response.data.message);
+        dispatch(getMyAuctionItems());
         dispatch(auctionSlice.actions.resetSlice());
     } catch (error) {
         dispatch(auctionSlice.actions.createAuctionFailed());
@@ -171,11 +172,14 @@ export const createAuction = (data) => async (dispatch) =>{
  export const republishAuction = (id,data)=>async(dispatch)=>{
     dispatch(auctionSlice.actions.republishItemRequest());
     try{
-        const response = await axios.put(`http://localhost:5000/api/v1/auctionitem/republish/${id}`,data,{
-       
-            withCredentials:true,
-            headers:{"Content-Type":"application/json"},
-        });
+        const response = await axios.put(
+          `http://localhost:5000/api/v1/auctionitem/republish/${id}`,
+          data,
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
         dispatch(auctionSlice.actions.republishItemSuccess());
         toast.success(response.data.message);
         dispatch(getMyAuctionItems());

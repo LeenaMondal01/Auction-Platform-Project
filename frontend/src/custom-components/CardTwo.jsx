@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
@@ -82,7 +82,7 @@ const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
               <span className="text-[#fdba88] font-bold ml-1">Time's up!</span>
             )}
           </p>
-          <div className='flex flex-col gap-2 mt-4'>
+          <div className="flex flex-col gap-2 mt-4">
             <Link
               className="bg-stone-700 text-center text-white text-x1 px-4 py-2 rounded-md
               transition-all duration-300 hover:bg-black"
@@ -119,14 +119,14 @@ const Drawer = ({ setOpenDrawer, openDrawer, id }) => {
   const dispatch = useDispatch();
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const { loading } = useSelector(state => state.auction);
+  const { loading } = useSelector((state) => state.auction);
 
   const handleRepublishAuction = () => {
     const formData = new FormData();
     formData.append("startTime", startTime);
     formData.append("endTime", endTime); // ✅ Fix: this was wrong earlier
     dispatch(republishAuction(id, formData));
-    setOpenDrawer(false); // ✅ optional better UX
+    //setOpenDrawer(false); // ✅ optional better UX
   };
 
   return (
@@ -138,10 +138,15 @@ const Drawer = ({ setOpenDrawer, openDrawer, id }) => {
           <h3 className="text-[#D64828] text-3xl font-semibold text-center mb-1">
             Republish Auction
           </h3>
-          <p className="text-stone-600">Let's republish auction with same details but new starting and ending time.</p>
+          <p className="text-stone-600">
+            Let's republish auction with same details but new starting and
+            ending time.
+          </p>
           <form className="flex flex-col gap-5 my-5">
             <div className="flex flex-col gap-3">
-              <label className="text-[16px] text-stone-600">Republish Auction Start Time</label>
+              <label className="text-[16px] text-stone-600">
+                Republish Auction Start Time
+              </label>
               <DatePicker
                 selected={startTime}
                 onChange={(date) => setStartTime(date)}
@@ -154,7 +159,9 @@ const Drawer = ({ setOpenDrawer, openDrawer, id }) => {
             </div>
 
             <div className="flex flex-col gap-3">
-              <label className="text-[16px] text-stone-600">Republish Auction End Time</label>
+              <label className="text-[16px] text-stone-600">
+                Republish Auction End Time
+              </label>
               <DatePicker
                 selected={endTime}
                 onChange={(date) => setEndTime(date)}
