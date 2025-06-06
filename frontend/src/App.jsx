@@ -17,7 +17,7 @@ import AuctionItem from './pages/AuctionItem';
 import CreateAuction from './pages/CreateAuction'
 import ViewMyAuctions from "./pages/ViewMyAuctions";
 import ViewAuctionDetails from './pages/ViewAuctionDetails';
-
+import Dashboard from './pages/Dashboard/Dashboard';
 
 
 
@@ -44,6 +44,7 @@ const App = () => {
         <Route path='/create-auction' element={<CreateAuction/>}></Route>
          <Route path='/view-my-auctions' element={<ViewMyAuctions/>}></Route>
           <Route path='/auction/details/:id' element={<ViewAuctionDetails/>}></Route>
+          <Route path='/dashboard' element={<Dashboard />}></Route>
     </Routes>
     <ToastContainer position='top-right'/>
   </Router>
