@@ -38,13 +38,13 @@ const App = () => {
       <Route path='/submit-commission' element={<SubmitCommission/>} />
       <Route path='/how-it-works-info' element={<HowItWorks/>}></Route>
       <Route path='/about' element={<About/>}></Route>
-       <Route path="/leaderboard" element={<Leaderboard />} />
-       <Route path='/auctions' element={<Auctions/>} />
-       <Route path='/auction/item/:id' element={<AuctionItem/>} />
-        <Route path='/create-auction' element={<CreateAuction/>}></Route>
-         <Route path='/view-my-auctions' element={<ViewMyAuctions/>}></Route>
-          <Route path='/auction/details/:id' element={<ViewAuctionDetails/>}></Route>
-          <Route path='/dashboard' element={<Dashboard />}></Route>
+      <Route path='/auctions' element={<Auctions/>} />
+      <Route path='/auction/item/:id' element={<AuctionItem/>} />
+      <Route path="/leaderboard" element={<Leaderboard />} />
+      <Route path='/create-auction' element={<CreateAuction/>}></Route>
+      <Route path='/view-my-auctions' element={<ViewMyAuctions/>}></Route>
+      <Route path='/auction/details/:id' element={<ViewAuctionDetails/>}></Route>
+      <Route path='/dashboard' element={<Dashboard />}></Route>
     </Routes>
     <ToastContainer position='top-right'/>
   </Router>

@@ -11,6 +11,7 @@ import PaymentProofs from "./sub-components/PaymentProofs";
 import PaymentGraph from "./sub-components/PaymentGraph";
 import BiddersAuctioneersGraph from "./sub-components/BiddersAuctioneersGraph";
 import Spinner from "@/custom-components/Spinner";
+import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.superAdmin);
@@ -20,6 +21,15 @@ const Dashboard = () => {
     dispatch(getAllPaymentProofs());
     dispatch(clearAllSuperAdminSliceErrors());
   }, []);
+
+  const {user, isAuthenticated} = useSelector(state => state.user)
+  const navigateTo = useNavigate();
+  useEffect(() => {
+    if(user.role !== "Super Admin" || !isAuthenticated){
+      navigateTo("/");
+    }
+  },[isAuthenticated]);
+
   return (
     <>
       {loading ? (
