@@ -140,9 +140,9 @@ const Signup = () => {
                         <div>
                             <label className='text-[16px] text-stone-600 font-semibold'>Google Pay, PhonePe and Paypal Details</label>
                             <div className='flex flex-col gap-1 sm:flex-row sm:gap-4'>
-                                <input type="number" value={UPI_ID_Gpay} placeholder='Google Pay UPI ID' onChange={(e)=>setUPI_ID_Gpay(e.target.value)} className='text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none sm:flex-1' disabled={role === "Bidder"}/>
+                                <input type="text" value={UPI_ID_Gpay} placeholder='Google Pay UPI ID' onChange={(e)=>setUPI_ID_Gpay(e.target.value)} className='text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none sm:flex-1' disabled={role === "Bidder"}/>
 
-                                <input type="number" value={UPI_ID_PhonePe} placeholder='PhonePe UPI ID' onChange={(e)=>setUPI_ID_PhonePe(e.target.value)} className='text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none sm:flex-1' disabled={role === "Bidder"}/>
+                                <input type="text" value={UPI_ID_PhonePe} placeholder='PhonePe UPI ID' onChange={(e)=>setUPI_ID_PhonePe(e.target.value)} className='text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none sm:flex-1' disabled={role === "Bidder"}/>
 
                                 <input type="email" value={paypalEmail} placeholder='Paypal Email ID' onChange={(e)=>setPaypalEmail(e.target.value)} className='text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none sm:flex-1' disabled={role === "Bidder"}/>
                             </div>
