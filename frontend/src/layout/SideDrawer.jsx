@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { RiAuctionFill, RiInstagramFill } from "react-icons/ri";
 import { MdLeaderboard, MdDashboard } from "react-icons/md";
 import { SiGooglesearchconsole } from "react-icons/si";
+import { FaUserCircle } from "react-icons/fa";
 import { BsFillInfoSquareFill } from "react-icons/bs";
 import { FaFacebook, FaEye } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -132,6 +133,20 @@ const SideDrawer = () => {
           )}
           <hr className="mb-4 border-t-[#d6482b]" />
           <ul className="flex flex-col gap-3">
+            {isAuthenticated ? (
+              <li>
+                <Link
+                  to={"/me"}
+                  className="flex text-xl font-semibold gap-2 items-center hover:text-[#D6482b]  hover:transition-all hover:duration-150 "
+                >
+                  <FaUserCircle />
+                  Profile
+                </Link>
+              </li>
+            ) : (
+              ""
+            )}
+
             <li>
               <Link
                 to={"/how-it-works-info"}
@@ -193,10 +208,3 @@ const SideDrawer = () => {
 };
 
 export default SideDrawer;
-
-
-
-
-
-
-
