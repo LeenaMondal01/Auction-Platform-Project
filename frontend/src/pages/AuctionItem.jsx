@@ -6,6 +6,7 @@ import { RiAuctionFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { placeBid } from "@/store/slices/bidSlice";
 
 const AuctionItem = () => {
   const { id } = useParams();
@@ -41,6 +42,8 @@ const AuctionItem = () => {
         `Bid must be higher than the current highest bid (Rs.${currentTopBid}).`
       );
       return;
+    }else{
+      toast.success("Bid placed successfully!");
     }
 
     const formData = new FormData();
@@ -60,11 +63,13 @@ const AuctionItem = () => {
   const isAuctionOngoing =
     auctionDetail?.startTime &&
     auctionDetail?.endTime &&
-    new Date(auctionDetail.startTime) < Date.now() &&
-    new Date(auctionDetail.endTime) > Date.now();
+    new Date(auctionDetail.startTime) <= Date.now() &&
+    new Date(auctionDetail.endTime) >= Date.now();
 
   const hasAuctionStarted =
-    auctionDetail?.startTime && Date.now() < new Date(auctionDetail.startTime);
+    auctionDetail.startTime &&
+     Date.now() > new Date(auctionDetail.startTime) &&
+     Date.now() < new Date(auctionDetail.endTime);
 
   return (
     <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col">
@@ -136,12 +141,17 @@ const AuctionItem = () => {
           <div className="flex-1">
             <header className="bg-stone-200 py-4 text-[24px] font-semibold px-4">
               BIDS
-            </header>
-            <div className="bg-white px-4 min-h-fit lg:min-h-[650px]">
-              {auctionBidders &&
+             </header>
+              <div className="bg-white px-4 min-h-fit lg:min-h-[650px]">
+               {
+               auctionBidders &&
               auctionBidders.length > 0 &&
-              isAuctionOngoing ? (
+              isAuctionOngoing 
+            
+              ? (
                 auctionBidders.map((element, index) => (
+          
+                  
                   <div
                     key={index}
                     className="py-2 flex items-center justify-between"
@@ -177,22 +187,37 @@ const AuctionItem = () => {
                             : "th"}
                     </p>
                   </div>
+                  
                 ))
-              ) : hasAuctionStarted ? (
-                <img
-                  src="/auctionstart.jpg"
-                  alt="not-started"
-                  className="w-full max-h-[650px]"
-                />
-              ) : (
-                <img
-                  src="/auctionend.jpg"
-                  alt="ended"
-                  className="w-full max-h-[650px]"
-                />
-              )}
-            </div>
+              ):(
+                <div className="text-center py-10 text-gray-500 text-xl">
+                No bidders yet.
+              </div>
+              )
+            }
+             
 
+
+            {/* for image */}
+            <div className="bg-white px-4 min-h-fit lg:min-h-[650px]">
+              {
+                hasAuctionStarted ? (
+                    <img
+                    src="/auctionstart.jpg"
+                    alt="not-started"
+                    className="w-full max-h-[650px] object-cover"
+                  />
+                ) : (
+                  <img
+                    src="/auctionend.jpg"
+                    alt="ended"
+                    className="w-full max-h-[650px] object-cover"
+                  />
+                            )}
+
+
+            </div>
+            </div> 
             <div className="bg-[#D6482B] py-4 text-[16px] md:text-[24px] font-semibold px-4 flex items-center justify-between">
               {auctionDetail?.startTime && auctionDetail?.endTime ? (
                 Date.now() >= new Date(auctionDetail.startTime) &&
@@ -206,6 +231,7 @@ const AuctionItem = () => {
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
                       />
+
                     </div>
                     <button
                       className="p-4 text-white bg-black rounded-full transition-all duration-300 hover:bg-[#e9e7e7]"
@@ -237,3 +263,4 @@ const AuctionItem = () => {
 };
 
 export default AuctionItem;
+
