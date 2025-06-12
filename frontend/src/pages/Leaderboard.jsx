@@ -2,6 +2,7 @@ import Spinner from "@/custom-components/Spinner";
 import React from "react";
 import { useSelector } from "react-redux";
 
+
 const Leaderboard = () => {
   const { loading, leaderboard } = useSelector((state) => state.user);
   return (
@@ -43,7 +44,7 @@ const Leaderboard = () => {
                             <span>
                               <img
                                 src={element.profileImage?.url}
-                                alt={element.username}
+                                alt={element.userName}
                                 className="h-12 w-12 object-cover rounded-full"
                               />
                             </span>

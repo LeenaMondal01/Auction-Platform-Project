@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+
 const bidSlice=createSlice({
     name:"bid",
     initialState:{
@@ -16,11 +17,12 @@ const bidSlice=createSlice({
         },
         bidFailed(state,action){
             state.loading=false;
-        }
-    },
+        },
+    
     clearAllBidErrors(state,action){
         state.loading=false
     }
+}
 });
 
  export const placeBid=(id,data)=>async(dispatch)=>{
@@ -31,8 +33,8 @@ const bidSlice=createSlice({
                 headers:{"Content-Type":"application/json"}
             });
         dispatch(bidSlice.actions.bidSuccess());
-
         toast.success(response.data.message);
+       dispatch(getAuctionDetail(id));
     } catch (error) {
         dispatch(bidSlice.actions.bidFailed());
         

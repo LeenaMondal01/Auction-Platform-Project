@@ -131,14 +131,14 @@ export const getMyAuctionItems = () => async (dispatch) => {
     }
 };
 export const getAuctionDetail = (id) => async (dispatch) => {
-    console.log("VIEW MY AUCTIONS")
+    // console.log("VIEW MY AUCTIONS")
     dispatch(auctionSlice.actions.getAuctionDetailRequest());
     try {
         const response = await axios.get(
             `http://localhost:5000/api/v1/auctionitem/auction/${id}`,
             { withCredentials: true }
         );
-        console.log(response)
+        // console.log(response)
         dispatch(
             auctionSlice.actions.getAuctionDetailSuccess(response.data)
         );
