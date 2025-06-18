@@ -26,8 +26,26 @@ const AuctionItem = () => {
       dispatch(getAuctionDetail(id));
     }
   }, [isAuthenticated, id]);
+   const finalBid=()=>{
+    if(isAuctionOngoing){
+                <p className="text-xl font-semibold">
+                  Current Bid:
+                  <span className="text-[#D6482b]">
+                    Rs.{auctionBidders?.[0]?.amount ?? auctionDetail?.startingBid ?? 0}
+                  </span>
+                </p>
+                }else{
+                  <p className="text-xl font-semibold">
+                  Final Bid:
+                  <span className="text-[#D6482b]">
+                    Rs.{auctionBidders?.[0]?.amount ?? auctionDetail?.startingBid ?? 0}
+                  </span>
+                  </p>
+                }
+   }
 
   const [amount, setAmount] = useState(0);
+
   const handleBid = async () => {
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
       toast.error("Please enter a valid bid amount.");
@@ -35,16 +53,17 @@ const AuctionItem = () => {
     }
 
     const minBid = auctionDetail?.startingBid ?? 0;
-    const currentTopBid = auctionBidders?.[0]?.amount ?? minBid;
+   const currentTopBid = auctionBidders?.[0]?.amount ?? minBid;
 
     if (Number(amount) <= currentTopBid) {
       toast.error(
         `Bid must be higher than the current highest bid (Rs.${currentTopBid}).`
       );
       return;
-    }else{
-      toast.success("Bid placed successfully!");
     }
+    // else{
+    //   toast.success("Bid placed successfully!");
+    // }
 
     const formData = new FormData();
     formData.append("amount", amount);
@@ -125,6 +144,31 @@ const AuctionItem = () => {
                     Rs.{auctionDetail?.startingBid ?? "N/A"}
                   </span>
                 </p>
+                {
+                   isAuctionOngoing?
+                <p className="text-xl font-semibold">
+                  Current Bid:
+                  <span className="text-[#D6482b]">
+                    Rs.{auctionBidders?.[0]?.amount ?? auctionDetail?.startingBid ?? 0}
+                  </span>
+                </p>
+                :
+                  <p className="text-xl font-semibold">
+                  Final Bid:
+                  <span className="text-[#D6482b]">
+                    Rs.{auctionBidders?.[0]?.amount ?? auctionDetail?.startingBid ?? 0}
+                  </span>
+                  </p>
+                  }
+
+                  {
+                    isAuctionOngoing?
+                    <p className="text-xl font-semibold text-[#D6482b]">
+                    "Auction is Ongoing."
+                    </p>:<p className="text-xl font-semibold text-[#D6482b]">
+                    "{auctionBidders?.[0]?.userName} won the Item."
+                    </p>
+                  }
               </div>
             </div>
 
