@@ -69,7 +69,7 @@ export const endedAuctionCron = () => {
             **Cash on Delivery (COD)**:\n- If you prefer COD, you must pay 20% of the total amount upfront before delivery.\n- To pay the 20% upfront, use any of the above methods.\n- 
             The remaining 80% will be paid upon delivery.\n- If you want to see the condition of your auction item then send your email on this:
              ${auctioneer.email}\n\nPlease ensure your payment is completed by [Payment Due Date]. Once we confirm the payment, the item will be shipped to you.\n\nThank you for
-              participating!\n\nBest regards,\nZeeshu Auction Team`;
+              participating!\n\nBest regards,\nNIT Auction Team`;
               await sendEmail({ email: bidder.email, subject, message });
               console.log("Successfully email sent to highest bidder");
          } catch (error) {
@@ -79,6 +79,18 @@ export const endedAuctionCron = () => {
             );
           
          }
+
+         //Auctioneer Email
+          console.log("SENDING EMAIL TO AUCTIONEER");
+          try {
+            const subject = `Auction Ended: ${auction.title}`;
+            const message = `Dear ${auctioneer.userName}, \n\nYour auction for ${auction.title} has ended. 
+            The highest bidder is ${bidder.userName} with a bid of ${highestBidder.amount}.\n\nYour commission for this auction is: ${commissionAmount}.\n\nPlease compelete the required payment and fill out the proof of payment form to confirm your payment.\n\nThank you for using our platform!\n\nBest regards,\nNIT Auction Team`;
+            await sendEmail({ email: auctioneer.email, subject, message });
+            console.log("Successfully email sent to auctioneer");
+          } catch (error) {
+            console.error("Failed to send email to auctioneer:", error);
+          }
          
         } else {
           await auction.save();
