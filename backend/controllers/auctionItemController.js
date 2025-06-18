@@ -4,6 +4,10 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { v2 as cloudinary } from "cloudinary";
 import mongoose from "mongoose";
+import { Bid } from "../models/bidSchema.js";
+import { useEffect } from "react";
+
+
 
 export const addNewAuctionItem = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -118,6 +122,7 @@ export const getAllItems = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const getAuctionDetails = catchAsyncErrors(async (req, res, next) => {
+  
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return next(new ErrorHandler("Invalid ID format.", 400));
