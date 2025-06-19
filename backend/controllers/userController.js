@@ -3,6 +3,8 @@ import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/userSchema.js";
 import {v2 as cloudinary} from "cloudinary"
 import { generateToken } from "../utils/jwtToken.js";
+import { sendEmail } from "../utils/sendEmail.js";
+import crypto from "crypto";
 
 export const register = catchAsyncErrors(async (req, res, next) => {
     if(!req.files || Object.keys(req.files).length === 0) {
@@ -135,4 +137,88 @@ export const fetchLeaderboard = catchAsyncErrors(async (req,res, next) => {
         success:true,
         leaderboard,
     });
+});
+
+
+export const updatePassword = catchAsyncErrors(async(req,res,next) => {
+  const { currentPassword, newPassword, confirmNewPassword } = req.body;
+  if(!currentPassword || !newPassword || !confirmNewPassword){
+    return next(new ErrorHandler("Please fill all fields",400));
+  }
+  const user= await User.findById(req.user.id).select("+password");
+  const isPasswordMatched = await user.comparePassword(currentPassword);
+  if(!isPasswordMatched){
+    return next(new ErrorHandler("Incorrect Current Password",400));
+  }
+  if(newPassword !== confirmNewPassword){
+    return next(new ErrorHandler("New Password and Confirm Password do not match",400));
+  }
+  user.password = newPassword;
+  await user.save();
+  res.status(200).json({
+    success: true,
+    message: "Password updated successfully!",
+  })
+})
+
+
+export const forgotPassword = catchAsyncErrors(async(req, res, next) => {
+    console.log(req.body);
+  const user = await User.findOne({email: req.body.email});
+  if(!user) {
+    return next(new ErrorHandler("User not found!",404));
+  }
+  const resetToken = user.getResetPasswordToken();
+  await user.save({validateBeforeSave: false});
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+  const message = `Your reset password token is: \n\n ${resetPasswordUrl} \n\n If you have not requested for this, please ignore it.`;
+
+  try{
+    await sendEmail({
+      email: user.email,
+      subject: "PrimeBid Auction Recovery Password",
+      message,
+    })
+    res.status(200).json({
+      success: true,
+      message: `Email sent to ${user.email} successfully!`,
+    })
+  } 
+  catch(error) {
+    user.resetPasswordExpire = undefined;
+    user.resetPasswordToken = undefined;
+    await user.save();
+    return next(new ErrorHandler(error.message,500));
+  }
+});
+
+
+
+export const resetPassword = catchAsyncErrors(async(req,res,next) => {
+  const {token} = req.params;
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: {$gt: Date.now()},
+  })
+
+  if(!user) {
+    return next(
+      new ErrorHandler(
+        "Reset Password Token is invalid or has been expired.",400
+      )
+    )
+  }
+  if(req.body.password !== req.body.confirmPassword) {
+    return next(new ErrorHandler("Password and Confirm Password do not match."));
+  }
+  user.password = req.body.password;
+  user.resetPasswordExpire = undefined;
+  user.resetPasswordToken = undefined;
+  await user.save();
+  generateToken(user,"Reset Password Successfully!", 200, res);
 });

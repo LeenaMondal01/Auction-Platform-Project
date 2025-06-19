@@ -9,6 +9,9 @@ const userSlice = createSlice({
     isAuthenticated: false,
     user: {},
     leaderboard: [],
+    isUpdated: false,
+    message: null,
+    error: null
   },
   reducers: {
     registerRequest(state, action) {
@@ -66,6 +69,24 @@ const userSlice = createSlice({
       state.loading = false;
       state.isAuthenticated = state.isAuthenticated;
       state.user = state.user;
+    },
+    updatePasswordRequest(state,action) {
+      state.loading = true;
+      state.isUpdated = false;
+      state.message = null;
+      state.error = null;
+    },
+    updatePasswordSuccess(state,action) {
+      state.loading = false;
+      state.isUpdated = true;
+      state.message = action.payload;
+      state.error = null;
+    },
+    updatePasswordFailed(state,action) {
+      state.loading = false;
+      state.isUpdated = false;
+      state.message = null;
+      state.error = action.payload;
     },
     fetchLeaderboardRequest(state, action) {
       state.loading = true;
@@ -176,4 +197,25 @@ export const fetchLeaderboard = () => async (dispatch) => {
     console.error(error);
   }
 };
+
+
+export const updatePassword = (currentPassword, newPassword, confirmNewPassword) => async(dispatch) => {
+  dispatch(userSlice.actions.updatePasswordRequest());
+  try{
+    const {data} = await axios.put(
+      "http://localhost:5000/api/v1/user/update/password",
+      {currentPassword,newPassword,confirmNewPassword},
+      {
+        withCredentials: true,
+        headers: {"Content-Type": "application/json"},
+      }
+    )
+    dispatch(userSlice.actions.updatePasswordSuccess(data.message));
+    dispatch(userSlice.actions.clearAllErrors());
+  }
+  catch(error){
+    dispatch(userSlice.actions.updatePasswordFailed(error.response.data.message));
+  }
+}
+
 export default userSlice.reducer;
