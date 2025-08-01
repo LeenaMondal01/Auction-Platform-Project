@@ -163,7 +163,7 @@ export const updatePassword = catchAsyncErrors(async(req,res,next) => {
 
 
 export const forgotPassword = catchAsyncErrors(async(req, res, next) => {
-    console.log(req.body);
+  console.log(req.body);
   const user = await User.findOne({email: req.body.email});
   if(!user) {
     return next(new ErrorHandler("User not found!",404));
