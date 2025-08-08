@@ -1,4 +1,3 @@
-import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -12,12 +11,12 @@ import commissionRouter from "./router/commissionRouter.js"
 import superAdminRouter from "./router/superAdminRoutes.js"
 import { endedAuctionCron } from "./automation/endedAuctionCron.js";
 import {verifyCommissionCron} from "./automation/verifyCommissionCron.js"
+import dotenv from "dotenv";
+dotenv.config();
 
 
 const app = express();
-config({
-  path: "./config/config.env"
-})
+
 
 app.use(cors({
   origin: [process.env.FRONTEND_URL],
