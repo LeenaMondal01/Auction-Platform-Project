@@ -36,8 +36,10 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/auctionitem", auctionItemRouter);
 app.use("/api/v1/bid",bidRouter);
 app.use("/api/v1/commission",commissionRouter);
-app.use("/api/v1/superadmin",superAdminRouter)
-
+app.use("/api/v1/superadmin",superAdminRouter);
+app.get("/",(req,res) => {
+  res.send("hello world"); 
+});
 
 endedAuctionCron();
 verifyCommissionCron();
