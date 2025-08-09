@@ -56,7 +56,7 @@ export const forgotPassword = (email) => async (dispatch) => {
     dispatch(forgotResetPassSlice.actions.forgotPasswordRequest());
     console.log(email);
     const response = await axios.post(
-      "process.env.BACKEND_URL/api/v1/user/password/forgot",
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/password/forgot`,
       { email },
       { withCredentials: true, headers: { "Content-Type": "application/json" } }
     );
@@ -79,7 +79,7 @@ export const resetPassword =
     try {
       dispatch(forgotResetPassSlice.actions.resetPasswordRequest());
       const response = await axios.put(
-        `process.env.BACKEND_URL/api/v1/user/password/reset/${token}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/password/reset/${token}`,
         { password, confirmPassword },
         {
           withCredentials: true,

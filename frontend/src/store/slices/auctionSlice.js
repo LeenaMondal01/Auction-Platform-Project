@@ -97,7 +97,7 @@ export const getAllAuctionItems = () => async (dispatch) => {
     dispatch(auctionSlice.actions.getAllAuctionItemRequest());
     try {
         const response = await axios.get(
-            "process.env.BACKEND_URL/api/v1/auctionitem/allitems",
+            `${import.meta.env.VITE_BACKEND_URL}/api/v1/auctionitem/allitems`,
             { withCredentials: true }
         );
         dispatch(
@@ -116,7 +116,7 @@ export const getMyAuctionItems = () => async (dispatch) => {
     dispatch(auctionSlice.actions.getMyAuctionsRequest());
     try {
         const response = await axios.get(
-            "process.env.BACKEND_URL/api/v1/auctionitem/myitems",
+            "`${import.meta.env.VITE_BACKEND_URL}/api/v1/auctionitem/myitems",
             { withCredentials: true }
         );
         dispatch(
@@ -135,7 +135,7 @@ export const getAuctionDetail = (id) => async (dispatch) => {
     dispatch(auctionSlice.actions.getAuctionDetailRequest());
     try {
         const response = await axios.get(
-            `process.env.BACKEND_URL/api/v1/auctionitem/auction/${id}`,
+            `${import.meta.env.VITE_BACKEND_URL}/api/v1/auctionitem/auction/${id}`,
             { withCredentials: true }
         );
         // console.log(response)
@@ -154,7 +154,7 @@ export const getAuctionDetail = (id) => async (dispatch) => {
 export const createAuction = (data) => async (dispatch) =>{
     dispatch(auctionSlice.actions.createAuctionRequest());
     try {
-        const response = await axios.post("process.env.BACKEND_URL/api/v1/auctionitem/create",data,{
+        const response = await axios.post("`${import.meta.env.VITE_BACKEND_URL}/api/v1/auctionitem/create",data,{
             withCredentials: true,
             headers: {"Content-Type" : "multipart/form-data"},
         });
@@ -173,7 +173,7 @@ export const createAuction = (data) => async (dispatch) =>{
     dispatch(auctionSlice.actions.republishItemRequest());
     try{
         const response = await axios.put(
-          `process.env.BACKEND_URL/api/v1/auctionitem/republish/${id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/auctionitem/republish/${id}`,
           data,
           {
             withCredentials: true,
@@ -195,7 +195,7 @@ export const createAuction = (data) => async (dispatch) =>{
    export const deleteAuction=(id)=>async(dispatch)=>{
      dispatch(auctionSlice.actions.deleteAuctionItemRequest());
     try{
-        const response = await axios.delete(`process.env.BACKEND_URL/api/v1/auctionitem/delete/${id}`,{
+        const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/auctionitem/delete/${id}`,{
             withCredentials:true,
            
         });

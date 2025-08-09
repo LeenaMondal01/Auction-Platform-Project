@@ -9,7 +9,7 @@ const UpcomingAuctions = () => {
   const today = new Date();
   const todayString = today.toDateString();
 
-  const auctionsStartingToday = allAuctions.filter((item) => {
+  const auctionsStartingToday = (allAuctions ?? []).filter((item) => {
     const auctionDate = new Date(item.startTime);
     return auctionDate.toDateString() === todayString;
   });
@@ -40,7 +40,7 @@ const UpcomingAuctions = () => {
 
        
           <div className="flex flex-col gap-4 w-full lg:flex-1 2xl:flex-none 2xl:basis-64 2xl:flex-grow">
-            {auctionsStartingToday.slice(0, 2).map((element) => (
+            {(auctionsStartingToday ?? []).slice(0, 2).map((element) => (
               <Link
                 to={`/auction/item/${element._id}`}
                 key={element._id}
