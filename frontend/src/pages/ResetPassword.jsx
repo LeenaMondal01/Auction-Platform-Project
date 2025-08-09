@@ -61,14 +61,14 @@ const ResetPassword = () => {
           >
             <div className="flex flex-col gap-2">
               <label className="text-[16px] text-stone-500">Password</label>
-              <input
+              {/* <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
-              />
-              {/* <div className="relative w-full">
+              /> */}
+              <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
@@ -82,7 +82,7 @@ const ResetPassword = () => {
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
-            </div> */}
+            </div>
 
             </div>
 

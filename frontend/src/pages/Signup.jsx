@@ -107,9 +107,9 @@ const Signup = () => {
                         </div>
                         <div className='flex flex-col sm:flex-1'>
                             <label className='text-[16px] text-stone-600'>Password</label>
-                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} 
-                                className='text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none'/>
-                            {/* <div className="relative w-full">
+                            {/* <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} 
+                                className='text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none'/> */}
+                            <div className="relative w-full">
                             <input
                                 type={showPassword ? "text" : "password"}
                                 value={password}
@@ -122,7 +122,7 @@ const Signup = () => {
                             >
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                             </span>
-                            </div> */}
+                            </div>
 
                         </div>
                     </div>

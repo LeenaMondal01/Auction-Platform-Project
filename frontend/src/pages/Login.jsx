@@ -59,13 +59,13 @@ const Login = () => {
                   Forgot Your Password?
                 </Link>
               </div>
-              <input
+              {/* <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
-              />
-              {/* <div className="relative w-full">
+              /> */}
+              <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
@@ -78,7 +78,7 @@ const Login = () => {
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
-            </div> */}
+            </div>
 
             </div>
 
