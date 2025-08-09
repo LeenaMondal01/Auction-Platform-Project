@@ -2,10 +2,14 @@ import { login } from "@/store/slices/userSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const { loading, isAuthenticated, error, message } = useSelector((state) => state.user);
 
@@ -61,6 +65,21 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
               />
+              {/* <div className="relative w-full">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none pr-10 w-full"
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-2 top-3 text-gray-600 cursor-pointer"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div> */}
+
             </div>
 
             <button

@@ -2,6 +2,7 @@ import { register } from '@/store/slices/userSlice';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
     const [userName, setUserName] = useState("");
@@ -18,6 +19,8 @@ const Signup = () => {
     const [paypalEmail, setPaypalEmail] = useState("");
     const [profileImage, setProfileImage] = useState("");
     const [profileImagePreview, setProfileImagePreview] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const { loading, isAuthenticated } = useSelector((state) => state.user);
     const navigateTo = useNavigate();
@@ -106,6 +109,21 @@ const Signup = () => {
                             <label className='text-[16px] text-stone-600'>Password</label>
                             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} 
                                 className='text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none'/>
+                            {/* <div className="relative w-full">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className='w-full text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none pr-10'
+                            />
+                            <span
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-2 top-2 cursor-pointer text-gray-600"
+                            >
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </span>
+                            </div> */}
+
                         </div>
                     </div>
 

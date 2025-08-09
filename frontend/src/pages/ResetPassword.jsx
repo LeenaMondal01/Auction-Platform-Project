@@ -5,11 +5,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 const ResetPassword = () => {
   const { token } = useParams();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const { loading, error, message } = useSelector(
     (state) => state.forgotPassword
   );
@@ -63,6 +68,22 @@ const ResetPassword = () => {
                 required
                 className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
               />
+              {/* <div className="relative w-full">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none pr-10 w-full"
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-2 top-3 text-gray-600 cursor-pointer"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div> */}
+
             </div>
 
             <div className="flex flex-col gap-2">
@@ -76,6 +97,23 @@ const ResetPassword = () => {
                 required
                 className="text-[16px] py-2 bg-transparent border-b-[1px]  border-b-stone-500 focus:outline-none"
               />
+
+              {/* <div className="relative w-full">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none pr-10 w-full"
+              />
+              <span
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-2 top-3 text-gray-600 cursor-pointer"
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div> */}
+
             </div>
 
             <button
