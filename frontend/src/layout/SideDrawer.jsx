@@ -26,26 +26,26 @@ const SideDrawer = () => {
     <>
       <div
         onClick={() => setShow(!show)}
-        className="fixed right-5 top-5 bg-primary text-white text-3xl p-2 rounded-md hover:bg-primaryHover lg:hidden"
+        className="fixed right-5 top-5 bg-[#D6482B] text-white text-3xl p-2 rounded-md hover:bg-primaryHover lg:hidden"
       >
         <GiHamburgerMenu />
       </div>
 
       <div
-        className={`w-full sm:w-[300px] bg-lightBg h-full fixed top-0 ${show ? "left-0" : "left-[-100%]"}
+        className={`w-full sm:w-[300px] bg-[#F6F4F0] h-full fixed top-0 ${show ? "left-0" : "left-[-100%]"}
   transition-all duration-100 p-4 flex flex-col justify-between lg:left-0 border-r border-stone-500`}
       >
         <div className="relative">
           <Link to={"/"}>
             <h4 className="text-2xl font-semibold mb-4">
-              Prime<span className="text-[#D6482b]">Bid</span>
+              Prime<span className="text-[#D6482B]">Bid</span>
             </h4>
           </Link>
           <ul className="flex flex-col gap-3">
             <li>
               <Link
                 to={"/auctions"}
-                className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482b]  hover:transition-all hover:duration-150 "
+                className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482B]  hover:transition-all hover:duration-150 "
               >
                 <RiAuctionFill />
                 Auctions
@@ -54,7 +54,7 @@ const SideDrawer = () => {
             <li>
               <Link
                 to={"/leaderboard"}
-                className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482b]  hover:transition-all hover:duration-150 "
+                className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482B]  hover:transition-all hover:duration-150 "
               >
                 <MdLeaderboard />
                 Leaderboard
@@ -66,7 +66,7 @@ const SideDrawer = () => {
                 <li>
                   <Link
                     to={"/submit-commission"}
-                    className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482b] hover:transition-all hover:duration-150 "
+                    className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482B] hover:transition-all hover:duration-150 "
                   >
                     <FaFileInvoiceDollar />
                     Submit Commission
@@ -75,7 +75,7 @@ const SideDrawer = () => {
                 <li>
                   <Link
                     to={"/create-auction"}
-                    className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482b] hover:transition-all hover:duration-150 "
+                    className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482B] hover:transition-all hover:duration-150 "
                   >
                     <IoIosCreate />
                     Create Auction
@@ -96,7 +96,7 @@ const SideDrawer = () => {
               <li>
                 <Link
                   to={"/dashboard"}
-                  className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482b] hover:transition-all hover:duration-150 "
+                  className="flex tex-xl font-semibold gap-2 items-center hover:text-[#D6482B] hover:transition-all hover:duration-150 "
                 >
                   <MdDashboard />
                   Dashboard
@@ -109,7 +109,7 @@ const SideDrawer = () => {
               <div className="my-4 flex gap-2">
                 <Link
                   to={"/sign-up"}
-                  className="bg-[#D64828] font-semibold hover:bg-[#b8381e] text-xl py-1 px-4 rounded-md text-white"
+                  className="bg-[#D6482B] font-semibold hover:bg-[#b8381e] text-xl py-1 px-4 rounded-md text-white"
                 >
                   Sign Up
                 </Link>
@@ -125,7 +125,7 @@ const SideDrawer = () => {
           ) : (
             <>
               <div className="my-4 flex gap-4 w-fit" onClick={handleLogout}>
-                <button className="bg-[#D64828] font-semibold hover:bg-[#b8381e] text-xl py-1 px-4 rounded-md text-white">
+                <button className="bg-[#D6482B] font-semibold hover:bg-[#b8381e] text-xl py-1 px-4 rounded-md text-white">
                   Logout
                 </button>
               </div>
@@ -198,7 +198,7 @@ const SideDrawer = () => {
               to={"/"}
               className="font-semibold hover:text-[#d6482b] hover:transition-all hover:duration-150"
             >
-              Group Project Team
+              NIT Auction Team
             </Link>
           </p>
         </div>

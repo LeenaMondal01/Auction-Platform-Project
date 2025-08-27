@@ -53,7 +53,7 @@ const AuctionItem = () => {
     }
 
     const minBid = auctionDetail?.startingBid ?? 0;
-   const currentTopBid = auctionBidders?.[0]?.amount ?? minBid;
+    const currentTopBid = auctionBidders?.[0]?.amount ?? minBid;
 
     if (Number(amount) <= currentTopBid) {
       toast.error(

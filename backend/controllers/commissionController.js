@@ -18,10 +18,6 @@ export const calculateCommission = async(auctionId) =>{
 }
 
 
-
-
-
-
 export const proofOfCommission = catchAsyncErrors(async(req,res , next)=>{
 
 
@@ -36,7 +32,7 @@ export const proofOfCommission = catchAsyncErrors(async(req,res , next)=>{
         return next(new ErrorHandler("Amount & comment are required fields.",400));
     }
 
-    if(user.unpaidCommission ===0){
+    if(user.unpaidCommission === 0){
        return res.status(200).json({
         success:true,
         message:"You don't have any unpaid commission."

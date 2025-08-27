@@ -116,7 +116,7 @@ export const getMyAuctionItems = () => async (dispatch) => {
     dispatch(auctionSlice.actions.getMyAuctionsRequest());
     try {
         const response = await axios.get(
-            "`${import.meta.env.VITE_BACKEND_URL}/api/v1/auctionitem/myitems",
+            `${import.meta.env.VITE_BACKEND_URL}/api/v1/auctionitem/myitems`,
             { withCredentials: true }
         );
         dispatch(
@@ -154,7 +154,7 @@ export const getAuctionDetail = (id) => async (dispatch) => {
 export const createAuction = (data) => async (dispatch) =>{
     dispatch(auctionSlice.actions.createAuctionRequest());
     try {
-        const response = await axios.post("`${import.meta.env.VITE_BACKEND_URL}/api/v1/auctionitem/create",data,{
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/auctionitem/create`,data,{
             withCredentials: true,
             headers: {"Content-Type" : "multipart/form-data"},
         });

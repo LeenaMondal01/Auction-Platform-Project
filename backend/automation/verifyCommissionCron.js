@@ -54,7 +54,7 @@ export const verifyCommissionCron = () => {
             Amount: ${updatedUserData.unpaidCommission}\nDate of Settlement: ${settlementDate}\n\nBest regards,\n NIT Auction Team`;
           sendEmail({ email: user.email, subject, message });
         }
-        console.log(`User ${proof.userId} paid commission of ${proof.amount}`);
+        //console.log(`User ${proof.userId} paid commission of ${proof.amount}`);
       } catch (error) {
         console.error(
           `Error proccessing commission proof for user ${proof.userId}: ${error.message} `

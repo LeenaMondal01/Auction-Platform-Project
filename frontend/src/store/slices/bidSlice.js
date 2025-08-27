@@ -18,11 +18,10 @@ const bidSlice=createSlice({
         bidFailed(state,action){
             state.loading=false;
         },
-    
-    clearAllBidErrors(state,action){
-        state.loading=false
+        clearAllBidErrors(state,action){
+            state.loading=false
+        }
     }
-}
 });
 
  export const placeBid=(id,data)=>async(dispatch)=>{

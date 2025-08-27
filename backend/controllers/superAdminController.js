@@ -26,7 +26,7 @@ export const deleteAuctionItem = catchAsyncErrors(async(req,res,next) => {
 });
 
 export const getAllPaymentProofs = catchAsyncErrors(async(req,res,next)=>{
-    let paymentProofs = await PaymentProof.findById({}).sort({createdAt: -1});
+    let paymentProofs = await PaymentProof.find();
     res.status(200).json({
         success:true,
         paymentProofs,
