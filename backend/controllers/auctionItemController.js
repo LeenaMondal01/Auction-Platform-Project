@@ -62,7 +62,7 @@ export const addNewAuctionItem = catchAsyncErrors(async (req, res, next) => {
 
   const alreadyOneActionActive = await Auction.find({
     createdBy: req.user._id,
-    endTime: { $gt: Date.now() },
+    endTime: { $gt: new Date() },
   });
 
   if (alreadyOneActionActive.length > 0) {

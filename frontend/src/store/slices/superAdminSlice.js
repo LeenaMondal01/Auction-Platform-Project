@@ -47,7 +47,7 @@ const superAdminSlice = createSlice({
     },
     successForPaymentProofs(state, action) {
       state.loading = false;
-      state.paymentProofs = action.paylaod;
+      state.paymentProofs = action.payload;
     },
     failureForPaymentProofs(state, action) {
       state.loading = false;
@@ -98,7 +98,7 @@ const superAdminSlice = createSlice({
         state.totalAuctioneers = state.totalAuctioneers;
         state.totalBidders = state.totalBidders;
         state.paymentProofs = state.paymentProofs;
-        state.singlePaymentProof = state.singlePaymentProof;
+        state.singlePaymentProof = {};
     }
   },
 });
@@ -199,6 +199,7 @@ export const updatePaymentProof = (id, status, amount) => async (dispatch) => {
     dispatch(superAdminSlice.actions.successForUpdatePaymentProof());
     toast.success(response.data.message);
     dispatch(getAllPaymentProofs());
+    dispatch(superAdminSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(superAdminSlice.actions.failureForUpdatePaymentProof());
     console.error(error.response.data.message);

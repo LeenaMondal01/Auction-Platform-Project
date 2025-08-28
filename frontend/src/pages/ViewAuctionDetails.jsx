@@ -114,7 +114,7 @@ const ViewAuctionDetails = () => {
                     key={index}
                     className="py-2 flex items-center justify-between"
                   >
-                    <div className="flex  flex-1 items-center gap-4">
+                    <div className="flex flex-1 items-center gap-4">
                       <img
                         src={element.profileImage}
                         alt={element.userName}
