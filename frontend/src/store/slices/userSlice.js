@@ -141,6 +141,7 @@ export const login = (data) => async (dispatch) => {
         headers: { "Content-Type": "application/json" },
       }
     );
+    console.log("response in login", response);  
     dispatch(userSlice.actions.loginSuccess(response.data));
     toast.success(response.data.message);
     dispatch(userSlice.actions.clearAllErrors());

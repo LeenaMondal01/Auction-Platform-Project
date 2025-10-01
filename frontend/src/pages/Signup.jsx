@@ -36,15 +36,16 @@ const Signup = () => {
         formData.append("address",address);
         formData.append("role",role);
         formData.append("profileImage",profileImage);
-        role === "Auctioneer" && 
+        if (role === "Auctioneer") {
             formData.append("bankAccountName",bankAccountName);
             formData.append("bankAccountNumber",bankAccountNumber);
             formData.append("bankName",bankName);
             formData.append("UPI_ID_Gpay",UPI_ID_Gpay);
             formData.append("UPI_ID_PhonePe",UPI_ID_PhonePe);
             formData.append("paypalEmail",paypalEmail);
+        }
         dispatch(register(formData));
-    } 
+    }
 
     useEffect(()=>{
         if(isAuthenticated){
@@ -54,12 +55,14 @@ const Signup = () => {
 
     const imageHandler = (e) => {
         const file  = e.target.files[0];
+        if (!file) return;
+        // set the file immediately so state has the file when the user submits
+        setProfileImage(file);
         const reader = new FileReader();
-        reader.readAsDataURL(file);
         reader.onload = () => {
-            setProfileImage(file);
             setProfileImagePreview(reader.result);
-        }
+        };
+        reader.readAsDataURL(file);
     }
 
     return (

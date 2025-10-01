@@ -21,15 +21,7 @@ const app = express();
 //   ? process.env.FRONTEND_URL.split(",")
 //   : [];
 app.use(cors({
-  origin: [process.env.FRONTEND_URL],
-  // origin: function (origin, callback) {
-  //   if (!origin || allowedOrigins.includes(origin)) {
-  //     callback(null, true);
-  //   } else {
-  //     callback(new Error("Not allowed by CORS"));
-  //   }
-  // },
-
+  origin: [process.env.FRONTEND_URL,"http://localhost:5173"],
   methods: ["POST","GET","PUT","DELETE"],
   credentials:  true,
 }));
@@ -59,7 +51,7 @@ app.use(errorMiddleware);
  
 
 // Add the server start code here
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
