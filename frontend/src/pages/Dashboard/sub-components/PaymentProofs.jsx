@@ -20,6 +20,7 @@ const PaymentProofs = () => {
   };
 
   const handleFetchPaymentDetail = (id) => {
+    console.log("Fetching payment proof details for ID:", id);
     dispatch(getSinglePaymentProofDetail(id));
   };
 

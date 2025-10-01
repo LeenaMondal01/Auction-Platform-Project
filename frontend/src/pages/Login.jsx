@@ -15,6 +15,10 @@ const Login = () => {
 
   const navigateTo = useNavigate();
   const dispatch = useDispatch();
+  console.log("loading state in login", loading);
+  console.log("isAuthenticated state in login", isAuthenticated);
+  console.log("error state in login", error);
+  console.log("message state in login", message);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -27,6 +31,7 @@ const Login = () => {
   useEffect(() => {
     if (isAuthenticated) {
       navigateTo("/");
+      console.log("navigated to home");
     }
   }, [dispatch, isAuthenticated, loading]);
 
