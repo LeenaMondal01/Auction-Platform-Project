@@ -4,12 +4,15 @@
 
 This project is developed collaboratively by the following contributors:
 
-**Shalini Nath**  
-**Ranveer Kumar Poddar**  
-**Deepika Kanwa**  
-**Bandana Kumari Nayek**  
-**Leena Mondal**  
-**Atul Xalxo**
+## Contributors
+
+- **Shalini Nath** – [GitHub](https://github.com/DiyaNath-22)
+- **Ranveer Kumar Poddar** – [GitHub](https://github.com/ranveer-2301)
+- **Deepika Kanwa** – [GitHub](https://github.com/DeepikaKanwa)
+- **Bandana Kumari Nayek** – [GitHub](https://github.com/codewithana)
+- **Leena Mondal** – [GitHub](https://github.com/LeenaMondal01)
+- **Atul Xalxo** – [GitHub](https://github.com/Atul-Xalxo)
+
 
 ---
 
@@ -100,23 +103,23 @@ https://auction-platform-project-2.onrender.com
 
 ## Project Structure
 
-Auction-Platform-Project
+Auction-Platform-Project/
 │
-├── frontend
-│ ├── src
-│ │ ├── components
-│ │ ├── pages
-│ │ ├── store
+├── frontend/
+│ ├── src/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ ├── store/
 │ │ └── App.jsx
 │ └── vite.config.js
 │
-├── backend
-│ ├── controllers
-│ ├── routes
-│ ├── models
-│ ├── middlewares
-│ ├── automation
-│ ├── database
+├── backend/
+│ ├── controllers/
+│ ├── routes/
+│ ├── models/
+│ ├── middlewares/
+│ ├── automation/
+│ ├── database/
 │ └── app.js
 │
 └── README.md
